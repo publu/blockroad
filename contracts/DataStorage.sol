@@ -5,15 +5,19 @@ contract DataStore {
     address public owner;
     bytes32 hash;
     uint256 public price;
+    string public title;
+    string public description;
     
-    event BoughtData(address receiver, bytes32 hash);
+    event BoughtData(address receiver, uint price, string title, bytes32 hash);
     
-    function DataStore(bytes32 _hash, uint256 _price) 
+    function DataStore(bytes32 _hash, uint256 _price, string _title, string _description) 
         public
     {
         owner = msg.sender;
         hash = _hash;
         price = _price;
+        title = _title;
+        description = _description;
     }
     
     function buyData()
@@ -25,7 +29,7 @@ contract DataStore {
         
         bytes32 encryptedHash = keccak256(msg.sender, hash);
         
-        BoughtData(msg.sender, encryptedHash);
+        BoughtData(msg.sender, price, title, encryptedHash);
        
         owner.transfer(msg.value);
        
