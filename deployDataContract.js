@@ -14,12 +14,12 @@ const output = solc.compile(input.toString(), 1);
 const bytecode = output.contracts['Token'].bytecode;
 const abi = JSON.parse(output.contracts['Token'].interface);
 
-function deployDataContract = (address, hash, price, title, desciption) {
+function deployDataContract = (address, hash, price, title, description) {
 
 	var mySenderAddress = address;
 	var priceWei = web3.toWei(price, ether);
 
-	var myContractReturned = MyContract.new(hash, price, {
+	var myContractReturned = MyContract.new(hash, price, title, description {
 	   from:mySenderAddress,
 	   data:bytecode,
 	   gas:gasEstimate}, function(err, myContract){
@@ -43,7 +43,9 @@ function deployDataContract = (address, hash, price, title, desciption) {
 
 	  // Deploy contract syncronous: The address will be added as soon as the contract is mined.
 	  // Additionally you can watch the transaction by using the "transactionHash" property
-	  var myContractInstance = MyContract.new(hash, price, {data: myContractCode, gas: 300000, from: mySenderAddress});
+	  var myContractInstance = MyContract.new(hash, price, title, description {data: myContractCode, gas: 300000, from: mySenderAddress});
 	  myContractInstance.transactionHash // The hash of the transaction, which created the contract
 	  myContractInstance.address // undefined at start, but will be auto-filled later
-	}
+
+	  return myContractInstance.address;
+}
