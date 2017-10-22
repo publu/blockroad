@@ -1,0 +1,8 @@
+{
+  "name": "blockroad",
+  "private": true,
+  "dependencies": {
+    "web3": "1.0.0-beta.24",
+    "solc" : "0.4.18"
+  }
+}
